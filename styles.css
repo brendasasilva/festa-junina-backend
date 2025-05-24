@@ -1,15 +1,17 @@
-/* Reset e fonte temática */
+/* Fonte divertida e limpa */
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
+/* Reset + estilo base */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Patrick Hand', cursive;
-  background: #fef7e0 url('https://www.transparenttextures.com/patterns/cloth-alike.png'); /* textura xadrez clara */
-  color: #4e342e;
+  background: #fff8dc url('https://www.transparenttextures.com/patterns/cloth-alike.png');
   background-size: 200px;
+  color: #4e342e;
 }
 
+/* Bandeirinhas animadas no topo */
 .header-bandeirinhas {
   width: 100%;
   height: 80px;
@@ -28,37 +30,27 @@ body {
   animation: tremular 3s infinite linear;
 }
 
-/* Animação das bandeirinhas */
 @keyframes tremular {
   0% { transform: skewY(0deg); }
-  50% { transform: skewY(1.5deg); }
+  50% { transform: skewY(2deg); }
   100% { transform: skewY(0deg); }
 }
 
+/* Convite principal */
 .convite {
-  background: #fff8dc url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* textura de papel rústico */
+  background: #fffde7 url('https://www.transparenttextures.com/patterns/paper-fibers.png');
   border: 6px double #8d6e63;
   padding: 2.5rem;
   margin: 3rem auto;
-  max-width: 700px;
-  box-shadow: 4px 4px 12px rgba(0,0,0,0.1);
+  max-width: 750px;
   border-radius: 16px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
   text-align: center;
   position: relative;
 }
 
-.convite::before {
-  content: "";
-  background: url('https://i.imgur.com/h0j8iL3.png'); /* exemplo de palha */
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 60px;
-  height: 60px;
-  position: absolute;
-  top: -30px;
-  left: -30px;
-}
-
+/* Detalhes decorativos */
+.convite::before,
 .convite::after {
   content: "";
   background: url('https://i.imgur.com/h0j8iL3.png');
@@ -67,27 +59,36 @@ body {
   width: 60px;
   height: 60px;
   position: absolute;
+}
+
+.convite::before {
+  top: -30px;
+  left: -30px;
+}
+.convite::after {
   bottom: -30px;
   right: -30px;
 }
 
+/* Título principal */
 h1 {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   color: #bf360c;
-  margin-bottom: 0.5rem;
-  text-shadow: 2px 2px 0 #ffe082;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px #ffe082;
 }
 
-p, li {
+/* Textos e listas */
+p, label, select, input {
   font-size: 1.2rem;
   line-height: 1.6;
 }
 
 ul {
   list-style: '🪗 ';
-  padding: 0;
-  margin-top: 1rem;
   text-align: left;
+  padding: 0 0 0 1rem;
+  margin-top: 1rem;
   display: inline-block;
 }
 
@@ -95,7 +96,25 @@ ul li {
   margin-bottom: 0.5rem;
 }
 
-.botao-confirmar {
+/* Inputs e formulário */
+input, select {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0.5rem auto 1rem;
+  padding: 0.7rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-family: 'Patrick Hand', cursive;
+}
+
+select:invalid {
+  color: #888;
+}
+
+/* Botão de confirmação */
+.botao-confirmar,
+button[type="submit"] {
   background-color: #d84315;
   color: white;
   border: 3px solid #bf360c;
@@ -104,15 +123,30 @@ ul li {
   border-radius: 10px;
   cursor: pointer;
   margin-top: 2rem;
-  transition: background 0.3s, transform 0.2s;
+  transition: background 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 0 #8d6e63;
 }
 
-.botao-confirmar:hover {
+button:hover {
   background-color: #ff7043;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
+/* Mensagens */
+#mensagem {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+/* Rodapé */
+footer {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 1rem;
+  color: #5d4037;
+}
+
+/* Responsivo */
 @media (max-width: 600px) {
   h1 {
     font-size: 2.2rem;
@@ -122,5 +156,8 @@ ul li {
     margin: 1rem;
     padding: 1.5rem;
   }
-}
 
+  input, select {
+    max-width: 90%;
+  }
+}
