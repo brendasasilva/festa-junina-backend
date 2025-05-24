@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arraiá dos Amigos</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="header-bandeirinhas"></div>
+
+  <main class="convite">
+    <h1>Arraiá dos Amigos</h1>
+    <p>NÓIS VAI FAZÊ UM ARRAIÁ BÃO DEMAIS SÔ!</p>
+    <p>
+      <strong>Data:</strong> 07 de junho de 2025<br />
+      <strong>Horário:</strong> Início: 16h - Término: 00h<br />
+      <strong>Local:</strong> Rua Olho D' Água do Borges, 90 - Vila Silvia - 03820-000 - Salão de Festa do Condomínio
+    </p>
+
+    <section>
+      <h2>Confirme sua presença</h2>
+
+      <form id="form" name="confirmacao">
+        <label for="nome1">Nome 1:</label>
+        <input type="text" id="nome1" name="nome1" required />
+
+        <label for="nome2">Nome 2:</label>
+        <input type="text" id="nome2" name="nome2" />
+
+        <label for="nome3">Nome 3:</label>
+        <input type="text" id="nome3" name="nome3" />
+
+        <label for="nome4">Nome 4:</label>
+        <input type="text" id="nome4" name="nome4" />
+
+        <p>Para nossa festança ficar mió, cada um traz uma gostosura da roça!</p>
+
+        <label for="prato">O que você pretende levar?</label>
+        <select id="prato" name="prato" required>
+          <option value="">Selecione...</option>
+          <!-- As opções serão carregadas dinamicamente pelo script.js -->
+        </select>
+
+        <p>Traga sua bebida favorita, alcoólica ou não, o importante é brindar juntos!</p>
+
+        <p id="mensagem" style="font-weight: bold; color: green;"></p>
+
+        <button type="submit" class="botao-confirmar">Confirmar presença</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>Organizado com carinho 💛</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
