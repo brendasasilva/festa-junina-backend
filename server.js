@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { Parser } = require('json2csv');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -81,8 +82,7 @@ app.post('/api/confirmar', (req, res) => {
   res.json({ sucesso: true });
 });
 
-const { Parser } = require('json2csv');
-
+// Rota para exportar confirmações em CSV
 app.get('/api/backup', (req, res) => {
   const confirmacoes = carregarConfirmacoes();
 
