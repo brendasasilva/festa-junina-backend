@@ -37,6 +37,23 @@ app.post('/api/confirmar', (req, res) => {
     return res.status(400).json({ erro: 'Prato já foi escolhido' });
   }
 
+  // Remove prato disponível
+  pratos = pratos.filter(p => p !== prato);
+  salvarPratos(pratos);
+
+  // Salva confirmação
+  const confirmacoes = carregarConfirmacoes();
+  confirmacoes.push({ nome, prato });
+  salvarConfirmacoes(confirmacoes);
+
+  res.json({ sucesso: true });
+});
+
+  let pratos = carregarPratos();
+  if (!pratos.includes(prato)) {
+    return res.status(400).json({ erro: 'Prato já foi escolhido' });
+  }
+
   pratos = pratos.filter(p => p !== prato);
   salvarPratos(pratos);
 
@@ -45,4 +62,9 @@ app.post('/api/confirmar', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+
+app.get('/api/confirmacoes', (req, res) => {
+  const confirmacoes = carregarConfirmacoes();
+  res.json(confirmacoes);
 });

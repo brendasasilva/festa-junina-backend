@@ -1,0 +1,10 @@
+const confirmacoesPath = path.join(__dirname, 'confirmacoes.json');
+
+function carregarConfirmacoes() {
+  if (!fs.existsSync(confirmacoesPath)) return [];
+  return JSON.parse(fs.readFileSync(confirmacoesPath, 'utf-8'));
+}
+
+function salvarConfirmacoes(confirmacoes) {
+  fs.writeFileSync(confirmacoesPath, JSON.stringify(confirmacoes, null, 2));
+}
