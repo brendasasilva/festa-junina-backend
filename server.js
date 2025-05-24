@@ -5,27 +5,56 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const pratosPath = path.join(__dirname, 'pratos.json');
+const confirmacoesPath = path.join(__dirname, 'confirmacoes.json');
 
+// Função para carregar pratos do JSON
 function carregarPratos() {
-  return JSON.parse(fs.readFileSync(pratosPath, 'utf-8'));
+  try {
+    return JSON.parse(fs.readFileSync(pratosPath, 'utf-8'));
+  } catch {
+    return [];
+  }
 }
 
+// Função para salvar pratos no JSON
 function salvarPratos(pratos) {
   fs.writeFileSync(pratosPath, JSON.stringify(pratos, null, 2));
 }
 
+// Função para carregar confirmações do JSON
+function carregarConfirmacoes() {
+  try {
+    return JSON.parse(fs.readFileSync(confirmacoesPath, 'utf-8'));
+  } catch {
+    return [];
+  }
+}
+
+// Função para salvar confirmações no JSON
+function salvarConfirmacoes(confirmacoes) {
+  fs.writeFileSync(confirmacoesPath, JSON.stringify(confirmacoes, null, 2));
+}
+
+// Rota para obter pratos disponíveis
 app.get('/api/pratos', (req, res) => {
   const pratos = carregarPratos();
   res.json(pratos);
 });
 
+// Rota para obter confirmações feitas
+app.get('/api/confirmacoes', (req, res) => {
+  const confirmacoes = carregarConfirmacoes();
+  res.json(confirmacoes);
+});
+
+// Rota para confirmar prato escolhido
 app.post('/api/confirmar', (req, res) => {
   const { nome, prato } = req.body;
   if (!nome || !prato) {
@@ -33,11 +62,12 @@ app.post('/api/confirmar', (req, res) => {
   }
 
   let pratos = carregarPratos();
+
   if (!pratos.includes(prato)) {
     return res.status(400).json({ erro: 'Prato já foi escolhido' });
   }
 
-  // Remove prato disponível
+  // Remove prato escolhido da lista
   pratos = pratos.filter(p => p !== prato);
   salvarPratos(pratos);
 
@@ -49,22 +79,6 @@ app.post('/api/confirmar', (req, res) => {
   res.json({ sucesso: true });
 });
 
-  let pratos = carregarPratos();
-  if (!pratos.includes(prato)) {
-    return res.status(400).json({ erro: 'Prato já foi escolhido' });
-  }
-
-  pratos = pratos.filter(p => p !== prato);
-  salvarPratos(pratos);
-
-  res.json({ sucesso: true });
-});
-
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
-
-app.get('/api/confirmacoes', (req, res) => {
-  const confirmacoes = carregarConfirmacoes();
-  res.json(confirmacoes);
 });
