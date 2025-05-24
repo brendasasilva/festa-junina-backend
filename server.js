@@ -81,6 +81,28 @@ app.post('/api/confirmar', (req, res) => {
   res.json({ sucesso: true });
 });
 
+const { Parser } = require('json2csv');
+
+app.get('/api/backup', (req, res) => {
+  const confirmacoes = carregarConfirmacoes();
+
+  if (!confirmacoes.length) {
+    return res.status(404).send('Nenhuma confirmação encontrada.');
+  }
+
+  try {
+    const parser = new Parser({ fields: ['nome', 'prato'] });
+    const csv = parser.parse(confirmacoes);
+
+    res.header('Content-Type', 'text/csv');
+    res.attachment('confirmacoes.csv');
+    res.send(csv);
+  } catch (err) {
+    console.error('Erro ao gerar CSV:', err);
+    res.status(500).send('Erro ao gerar backup em CSV.');
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
