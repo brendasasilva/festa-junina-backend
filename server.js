@@ -17,8 +17,11 @@ const confirmacoesPath = path.join(__dirname, 'confirmacoes.json');
 // Função para carregar pratos do JSON
 function carregarPratos() {
   try {
-    return JSON.parse(fs.readFileSync(pratosPath, 'utf-8'));
-  } catch {
+    const data = fs.readFileSync(pratosPath, 'utf-8');
+    console.log('Pratos carregados:', data);  // Veja o que aparece no terminal
+    return JSON.parse(data);
+  } catch (err) {
+    console.error('Erro ao ler pratos.json:', err);
     return [];
   }
 }
