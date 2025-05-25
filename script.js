@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const API_URL = 'https://script.google.com/macros/s/SEU_ENDPOINT_AQUI/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbyrZAn1i5WKrivrCxYBr4zsj9OjOQFH7BzMc0JSqDZiSeiwRGMdWJzkBpy1j6ETHGeIgg/exec';
   const pratoSelect = document.getElementById('prato');
   const form = document.getElementById('form');
   const mensagem = document.getElementById('mensagem');
@@ -8,14 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(API_URL)
       .then(res => res.json())
       .then(pratos => {
-        pratoSelect.innerHTML = '<option value="">-- Selecione --</option>';
-        pratos.forEach(prato => {
-          const option = document.createElement('option');
-          option.value = prato;
-          option.textContent = prato;
-          pratoSelect.appendChild(option);
-        });
-      })
+		if (!Array.isArray(pratos)) throw new Error("Resposta inválida da API");
+		pratoSelect.innerHTML = '<option value="">-- Selecione --</option>';
+		pratos.forEach(prato => {
+			const option = document.createElement('option');
+			option.value = prato;
+			option.textContent = prato;
+			pratoSelect.appendChild(option);
+		});
+	})
       .catch(() => {
         mensagem.style.color = 'red';
         mensagem.textContent = 'Erro ao carregar pratos disponíveis.';
