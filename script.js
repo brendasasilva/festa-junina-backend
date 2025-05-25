@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const API_URL = 'https://festa-junina-backend.onrender.com';
+  const API_URL = 'https://script.google.com/macros/s/SEU_ENDPOINT_AQUI/exec';
   const pratoSelect = document.getElementById('prato');
   const form = document.getElementById('form');
   const mensagem = document.getElementById('mensagem');
 
   function carregarPratos() {
-    fetch(`${API_URL}/api/pratos`)
+    fetch(API_URL)
       .then(res => res.json())
       .then(pratos => {
         pratoSelect.innerHTML = '<option value="">-- Selecione --</option>';
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    fetch(`${API_URL}/api/confirmar`, {
+    fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nome: nomes, prato })
