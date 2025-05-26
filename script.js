@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const API_URL = 'https://script.google.com/macros/s/AKfycbyhec6RRc1_adGPHMbv83kHaoOHvUcYbcyDS-H89aNbzYoTbL5sOy3aMtfI1IsQs0Tn/exec';
+  const API_URL = 'https://script.google.com/macros/s/AKfycbwiCu6vP7SQabAOkzPoUMSdFhkM9c1-_UIFZ0li_yj1UswBiCzwYrxACidUDWyHVLi-/exec';
   const pratoSelect = document.getElementById('prato');
   const form = document.getElementById('form');
   const mensagem = document.getElementById('mensagem');
